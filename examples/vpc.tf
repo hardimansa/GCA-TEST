@@ -1,19 +1,31 @@
 locals {
+
+    ## PROJECT ##
   project_id = "gcp-terraform-1-353112"
+
+  ### VPC LOCAL ###
   network1_name = "prod"
   auto_create_subnetworks = false
   mtu = 1412
   routing_mode = "REGIONAL"
   delete_default_routes_on_create = "true"
 
-  ### SUBNET LOCALS ###
+  ### SUBNET1 LOCALS ###
   subnet1_name = "prod-1-sub"
   subnet1_region = "us-central1"
   subnet1_ip = "10.10.0.0/16"
 
+### SUBNET2 LOCALS ###
+
   subnet2_name = "prod-2-sub"
   subnet2_region = "us-west1"
   subnet2_ip = "192.168.1.0/24"
+
+### FIREWALL LOCALS ###
+
+
+
+### ROUTING LOCALS ###
 }
 
 
