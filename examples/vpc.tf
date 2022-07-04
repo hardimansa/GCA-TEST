@@ -10,6 +10,10 @@ locals {
   subnet1_name = "prod-1-sub"
   subnet1_region = "us-central1"
   subnet1_ip = "10.10.0.0/16"
+
+  subnet2_name = "prod-2-sub"
+  subnet2_region = "us-west1"
+  subnet2_ip = "192.168.1.0/24"
 }
 
 
@@ -28,6 +32,13 @@ subnets = [ {
         subnet_name = local.subnet1_name
         subnet_region = local.subnet1_region
         subnet_ip = local.subnet1_ip
-       
-}]
+        },
+
+        {
+        subnet_name = local.subnet2_name
+        subnet_region = local.subnet2_region
+        subnet_ip = local.subnet2_ip
+        }
+       ]
 }
+
