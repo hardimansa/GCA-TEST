@@ -26,8 +26,16 @@ locals {
   subnet2_ip = "192.168.1.0/24"
 
 ### FIREWALL LOCALS ###
-
-
+  firewall-name = "prod-http-deny"
+  firewall-direction = "INGRESS"
+  firewall-description = "deny-http-to-prod"
+  action = "deny"
+  ranges = ["0.0.0.0/0"]
+  priority = 999
+  target_tags = null
+  source_tags = null 
+  ports = ["80"]
+  protocol = "tcp"
 
 ### ROUTING LOCALS ###
 }
@@ -57,26 +65,24 @@ module "vpc_1" {
         }
        ]
    rules = [ {
+    description = local.firewall-description
+    direction = local.firewall-direction
+    action = local.action
+    ranges = local.ranges
+    source_tags = local.source_tags
+    priority = local.priority
+    name = local.firewall-name
+    target_tags = local.target_tags
+    source_tags = local.source_tags
 
-            description = "Deny HTTP"
-            direction = "INGRESS"
-            action = "deny"
-            ranges = ["0.0.0.0/0"]
-            source_tags = "web"
-            priority = 1000
-            name = "deny-http"
-            target_tags = null
-            source_tags = null
-        
-        allow = []
+    allow = []
 
-
-        deny = [{
-            protocol = "tcp"
-            ports = ["80"]
-        }]
-            
-        } ]
+    deny = [{
+        protocol = local.protocol
+        ports = local.ports
+    }]
+   }
+   ]
     }
    
 
