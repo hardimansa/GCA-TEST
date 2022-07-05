@@ -1,10 +1,10 @@
-# https://github.com/terraform-google-modules/terraform-google-network
+# some code pulled from  -  https://github.com/terraform-google-modules/terraform-google-networkyed
 
 
 
 locals {
 
-    ## PROJECT ##
+  ### PROJECT ###
   project_id = "gcp-terraform-1-353112"
 
   ### VPC LOCAL ###
@@ -23,7 +23,7 @@ locals {
   vpc2_subnet1_region = "us-central1"
   vpc2_subnet1_ip =  "10.20.20.0/24"
 
-### SUBNET2 LOCALS ###
+  ### SUBNET2 LOCALS ###
 
   subnet2_name = "prod-2-sub"
   subnet2_region = "us-west1"
@@ -47,8 +47,7 @@ locals {
 ### ROUTING LOCALS ###
 
 ### Virtual Machine Locals ###
-machine_type = "e2-minimal"
-startup_script = "echo > /test.txt"
+
 
 }
 
