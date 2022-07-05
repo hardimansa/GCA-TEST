@@ -1,3 +1,7 @@
+# https://github.com/terraform-google-modules/terraform-google-network
+
+
+
 locals {
 
     ## PROJECT ##
@@ -40,7 +44,7 @@ module "vpc_1" {
     delete_default_routes_on_create = local.delete_default_routes_on_create
 
     #### START OF SUBNET ####
-subnets = [ {
+    subnets = [ {
         subnet_name = local.subnet1_name
         subnet_region = local.subnet1_region
         subnet_ip = local.subnet1_ip
@@ -52,5 +56,27 @@ subnets = [ {
         subnet_ip = local.subnet2_ip
         }
        ]
-}
+   rules = [ {
+
+            description = "Deny HTTP"
+            direction = "INGRESS"
+            action = "deny"
+            ranges = ["0.0.0.0/0"]
+            source_tags = "web"
+            priority = 1000
+            name = "deny-http"
+            target_tags = null
+            source_tags = null
+        
+        allow = []
+
+
+        deny = [{
+            protocol = "tcp"
+            ports = ["80"]
+        }]
+            
+        } ]
+    }
+   
 

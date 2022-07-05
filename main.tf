@@ -1,3 +1,8 @@
+
+## https://github.com/terraform-google-modules/terraform-google-network
+
+
+
 module "vpc" {
     source = "./modules/vpc"
     network_name = var.network_name
@@ -14,6 +19,15 @@ module "subnets" {
     project_id  = var.project_id
     network_name = module.vpc.network_name
     subnets = var.subnets
+ 
+}
 
-  
+
+
+module "firewall" {
+    source = "./modules/firewall"
+    project_id = var.project_id
+    network_name = module.vpc.network_name
+    rules = var.rules
+
 }
