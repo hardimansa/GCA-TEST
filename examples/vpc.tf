@@ -13,7 +13,7 @@ locals {
   auto_create_subnetworks = false
   mtu = 1412
   routing_mode = "REGIONAL"
-  delete_default_routes_on_create = "true"
+  delete_default_routes_on_create = "false"
 
   ### SUBNET1 LOCALS ###
   subnet1_name = "prod-1-sub"
@@ -33,15 +33,15 @@ locals {
   vpc2_subnet2_ip = "192.168.20.0/24"
 
 ### FIREWALL LOCALS ###
-  firewall-name = "prod-http-deny"
+  firewall-name = "prod-http-allow"
   firewall-direction = "INGRESS"
-  firewall-description = "deny-http-to-prod"
-  action = "deny"
+  firewall-description = "allow-http-to-prod"
+  action = "allow"
   ranges = ["0.0.0.0/0"]
   priority = 999
   target_tags = null
   source_tags = null 
-  ports = ["80"]
+  ports = ["80","8080"]
   protocol = "tcp"
 
 ### ROUTING LOCALS ###
@@ -121,5 +121,5 @@ module "vpc_1" {
 
       
     }
-   
+
 
