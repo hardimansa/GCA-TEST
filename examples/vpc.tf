@@ -41,7 +41,7 @@ locals {
   priority = 999
   target_tags = null
   source_tags = null 
-  ports = ["80","8080"]
+  ports = ["80","8080","22"]
   protocol = "tcp"
 
 ### ROUTING LOCALS ###
@@ -86,16 +86,17 @@ module "vpc_1" {
     target_tags = local.target_tags
     source_tags = local.source_tags
 
-    allow = []
-
-    deny = [{
-        protocol = local.protocol
-        ports = local.ports
+    allow = [{
+      protocol = local.protocol
+      ports = local.ports
     }]
-   }
-   ]
 
-    }
+     deny =[]
+   }
+   
+   
+   ]
+}
 
     module "vpc_2" {
     source = "../"
